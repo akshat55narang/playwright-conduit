@@ -2,12 +2,17 @@ import { expect, Page } from "@playwright/test";
 import headerLocators from "../../locators/headerLocators";
 import { BasePage } from "../BasePage";
 
-export class HeaderSection extends BasePage {
+export class HomePage extends BasePage {
     readonly page: Page;
 
     constructor(page: Page) {
         super(page);
         this.page = page;
+    }
+
+    async open() {
+        await this.goto();
+        await this.shouldBeOnHomePage();
     }
 
     async verifyIfNavigationItemIsActive(navItemLocator: string) {
@@ -20,10 +25,9 @@ export class HeaderSection extends BasePage {
         await this.verifyIfNavigationItemIsActive(navItemLocator);
     }
 
-    async verifyHomePage() {
+    async shouldBeOnHomePage() {
         await expect(this.page.locator(headerLocators.unAuthorisedBannerParagrapgh))
         .toHaveText('A place to share your knowledge.');
     }
-
 
 }
