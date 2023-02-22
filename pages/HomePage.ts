@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import headerLocators from "../../locators/headerLocators";
-import { BasePage } from "../BasePage";
+import headerLocators from "../locators/headerLocators";
+import { BasePage } from "./BasePage";
 
 export class HomePage extends BasePage {
     readonly page: Page;

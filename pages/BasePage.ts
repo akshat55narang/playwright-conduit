@@ -11,6 +11,26 @@ export class BasePage {
         await this.page.goto(url);
     }
 
+    async urlShouldContainText(text: string) {
+        await expect(this.page).toHaveURL(text);
+    }
+
+    async shouldHaveTitle(title: string) {
+        await expect(this.page).toHaveTitle(title);
+    }
+    
+    async shouldBeVisible(locator: string) {
+        await expect(this.page.locator(locator)).toBeVisible();
+    }
+
+    async shouldHaveClass(locator: string, className: string) {
+        await expect(this.page.locator(locator)).toHaveClass(className);
+    }
+
+    async shouldContainText(locator: string, text: string) {
+        await expect(this.page.locator(locator)).toContainText(text);
+    }
+
     async clickLocatorWithText(text: string) {
         await this.page.getByText(text).click();
     }
@@ -19,19 +39,7 @@ export class BasePage {
         await this.page.locator(locator).click();
     }
 
-    async shouldHaveTitle(title: string) {
-        await expect(this.page).toHaveTitle(title);
-    }
-
-    async urlShouldContain(text: string) {
-        await expect(this.page).toHaveURL(text);
-    }
-
-    async shouldHaveClass(locator: Locator, className: string) {
-        await expect(locator).toHaveClass(className);
-    }
-
-    async verify() {
-
+    async sendTextToField(locator: string, text: string) {
+        await this.page.locator(locator).fill(text);
     }
 }

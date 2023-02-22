@@ -1,6 +1,6 @@
 import { expect, request } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
-import { LOGIN_API } from "./RestContants";
+import { API_BASE_URL, LOGIN_API } from "../constants/RestContants";
 
 
 export class LoginApi {
@@ -14,7 +14,7 @@ export class LoginApi {
         password: string = "testen#1"
       ): Promise<string> {
          const apiRequestContext = await request.newContext({
-            baseURL: 'https://api.realworld.io/api',
+            baseURL: API_BASE_URL,
             ignoreHTTPSErrors: true
          });
 
@@ -25,9 +25,10 @@ export class LoginApi {
                 "password": password
               }
             }         
-          }) 
-          await expect(response.status()).toEqual(StatusCodes.OK);
+          });
           const responseBody = await response.json();
+          await expect(response.status()).toEqual(StatusCodes.OK);
+          
           return responseBody.user.token;
       }
 }

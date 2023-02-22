@@ -1,4 +1,5 @@
 import { expect, test } from '../fixtures/pageFixtures';
+import routes from '../constants/routes';
 import headerLocators from '../locators/headerLocators';
 import { SignInPage } from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
@@ -28,5 +29,13 @@ import { SignUpPage } from '../pages/SignUpPage';
         await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignUpLink);
         await signUpPage.shouldBeOnSignUpPage();
     });
+
+    for (const route in routes) {
+        test.fixme(`${route} Route should have title ${route} — Conduit`, async ({homePage}) => {
+            await homePage.goto(route);
+            const title = route.replace('_', ' ').replace(route.charAt(0), route.charAt(0).toUpperCase());
+            await homePage.shouldHaveTitle(`${title} — Conduit`);
+        });
+    }
 
 

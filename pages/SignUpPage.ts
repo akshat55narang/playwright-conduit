@@ -1,7 +1,7 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import signUpPageLocators from '../locators/signUpPageLocators';
-import headerRoutes from "../routes/header-routes";
+import headerRoutes from "../constants/routes";
 
 export class SignUpPage extends BasePage{
     readonly page: Page;

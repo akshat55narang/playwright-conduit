@@ -1,7 +1,10 @@
+//@ts-check
+
 import { test as base, expect } from '@playwright/test';
-import { HomePage } from '../pages/sections/HomePage';
+import { HomePage } from '../pages/HomePage';
 import { SignInPage } from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
+import { UserApi } from '../rest/UserApi';
 
 type Fixtures = {
     homePage: HomePage,
@@ -15,8 +18,10 @@ export const test = base.extend<Fixtures>({
         await use(homePage);
     },
     signInPage: async ({ page }, use) => {
+        const userApi = new UserApi();
+        await userApi.createUserIfNotExisting();
         const signInPage = new SignInPage(page);
-        signInPage.open();
+        await signInPage.open();
         await use(signInPage);
     },
     signUpPage: async ({ page }, use) => {
