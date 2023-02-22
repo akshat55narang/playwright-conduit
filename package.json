@@ -1,0 +1,23 @@
+{
+  "name": "playwright-conduit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pw:test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshat55narang/playwright-conduit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshat55narang/playwright-conduit/issues"
+  },
+  "homepage": "https://github.com/akshat55narang/playwright-conduit#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.27.1"
+  }
+}
