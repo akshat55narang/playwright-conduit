@@ -16,8 +16,7 @@ export class HomePage extends BasePage {
     }
 
     async verifyIfNavigationItemIsActive(navItemLocator: string) {
-        const locator = this.page.locator(navItemLocator);
-        await this.shouldHaveClass(locator, 'nav-link active');
+        await this.shouldHaveClass(navItemLocator, 'nav-link active');
     }
 
     async openNavigationItem(navItemLocator: string) {
