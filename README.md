@@ -18,8 +18,8 @@ Test automation of Demo [Real World](https://demo.realworld.io/#/) app using pla
 - [tests](/tests/) - contains all the tests.
 
 ## How to Run:
--  Download this project on your local machine
-> git clone https://github.com/akshat55narang/playwright-conduit.git
+-  Download this project on your local machine using: 
+   > git clone https://github.com/akshat55narang/playwright-conduit.git
 - cd to `playwright-conduit` folder
 - Run `npm install` to install all dependencies
 - Run `npx playwright install` - to install all the browsers.
