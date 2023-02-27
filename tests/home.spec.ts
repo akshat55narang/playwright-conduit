@@ -1,8 +1,6 @@
 import { test } from '../fixtures/pageFixtures';
 import routes from '../constants/routes';
 import headerLocators from '../locators/headerLocators';
-import { SignInPage } from '../pages/SignInPage';
-import { SignUpPage } from '../pages/SignUpPage';
 
 
     test('Home page should be default active tab', async ({ homePage }) => {
@@ -18,14 +16,12 @@ import { SignUpPage } from '../pages/SignUpPage';
         await homePage.openNavigationItem(headerLocators.unAuthorizedUserHomeLink);
     });
 
-    test('Sign in button should redirect to login page', async ({ homePage, page }) => {
-        const signInPage = new SignInPage(page);
+    test('Sign in button should redirect to login page', async ({ homePage, signInPage }) => {
         await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignInLink);
         await signInPage.shouldBeOnSignInPage();
     });
 
-    test('Sign up button should redirect to register page', async ({ homePage, page }) => {
-        const signUpPage = new SignUpPage(page);
+    test('Sign up button should redirect to register page', async ({ homePage, signUpPage }) => {
         await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignUpLink);
         await signUpPage.shouldBeOnSignUpPage();
     });
