@@ -25,10 +25,19 @@ export class SignInPage extends BasePage {
         await this.shouldBeVisible(this.emailInput);
     }
 
-    async loginUser(email = "DX1193111111@testacc.com", password = "testen#1") {
+    async login(email,password ) {
         await this.sendTextToField(this.emailInput, email);
         await this.sendTextToField(signInPageLocators.passwordInput, password);
         await this.clickByLocator(signInPageLocators.signInButton);
+    }
+
+    async loginWithValidUser(email = 'DX1193111111@testacc.com', password= 'testen#1') {
+        await this.login(email, password);
         await this.shouldBeVisible(userOverviewPageLocators.yourFeedLink);
+    }
+
+    async loginWithInValidUser(email, password) {
+        await this.login(email, password);
+        await this.shouldBeVisible(signInPageLocators.signInErrorMessageList);
     }
 }
