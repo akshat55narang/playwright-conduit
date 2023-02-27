@@ -1,4 +1,4 @@
-import { expect, test } from '../fixtures/pageFixtures';
+import { test } from '../fixtures/pageFixtures';
 import routes from '../constants/routes';
 import headerLocators from '../locators/headerLocators';
 import { SignInPage } from '../pages/SignInPage';

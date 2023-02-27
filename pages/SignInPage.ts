@@ -1,6 +1,6 @@
 //@ts-check
 
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import signInPageLocators from '../locators/signInPageLocators';
 import routes from "../constants/routes";
@@ -25,7 +25,7 @@ export class SignInPage extends BasePage {
         await this.shouldBeVisible(this.emailInput);
     }
 
-    async loginUser(email: string = "DX1193111111@testacc.com", password: string = "testen#1") {
+    async loginUser(email = "DX1193111111@testacc.com", password = "testen#1") {
         await this.sendTextToField(this.emailInput, email);
         await this.sendTextToField(signInPageLocators.passwordInput, password);
         await this.clickByLocator(signInPageLocators.signInButton);

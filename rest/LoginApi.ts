@@ -5,13 +5,10 @@ import { API_BASE_URL, LOGIN_API } from "../constants/RestContants";
 
 export class LoginApi {
 
-    constructor() {
-
-    }
 
     async generateAccessToken(
-        email: string = "DX1193111111@testacc.com",
-        password: string = "testen#1"
+        email = "DX1193111111@testacc.com",
+        password = "testen#1"
       ): Promise<string> {
          const apiRequestContext = await request.newContext({
             baseURL: API_BASE_URL,

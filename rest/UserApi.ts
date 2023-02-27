@@ -1,7 +1,6 @@
-import { APIRequest, APIRequestContext, expect, request } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
-import { LoginApi } from "./LoginApi";
-import { LOGIN_API, PROFILES_API, USERS_API, USER_API } from "../constants/RestContants";
+import { PROFILES_API, USERS_API, USER_API } from "../constants/RestContants";
 import { BaseApi } from "./BaseApi";
 
 export class UserApi extends BaseApi {
@@ -11,9 +10,9 @@ export class UserApi extends BaseApi {
     }
 
     async createUserIfNotExisting(
-        username: string = 'DX1193111111',
-        email: string = 'DX1193111111@testacc.com',
-        password: string = 'testen#1'
+        username = 'DX1193111111',
+        email = 'DX1193111111@testacc.com',
+        password = 'testen#1'
     ) {
       if(!await this.isUserExisting(username)) {
         

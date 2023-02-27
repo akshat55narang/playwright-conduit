@@ -5,10 +5,6 @@ import { LoginApi } from "./LoginApi";
 export class BaseApi {
     protected readonly loginApi: LoginApi = new LoginApi();
 
-    constructor() {
-
-    }   
-
     async baseRequest(): Promise<APIRequestContext> {
         const accessToken = await this.loginApi.generateAccessToken();
         

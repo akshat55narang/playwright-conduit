@@ -1,6 +1,6 @@
 //@ts-check
 
-import { test as base, expect } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { SignInPage } from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
