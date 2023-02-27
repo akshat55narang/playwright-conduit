@@ -1,5 +1,5 @@
 # playwright-conduit
-Test automation of Demo [Real World](https://demo.realworld.io/#/) app using playwright.
+Test automation of Demo [Real World](https://demo.realworld.io/#/) app using playwright in typescript.
 
 ### Tools Used
 1. Programming Language - TypeScript
@@ -15,13 +15,14 @@ Test automation of Demo [Real World](https://demo.realworld.io/#/) app using pla
 - [rest](/rest/) - Contains methods to make API calls for setup and teardown in UI tests. 
   [BaseApi.ts](./rest/BaseApi.ts) - Provides base request which sets up request context like baseUrl, etc.
    which can be used by all extending classes to make API calls promoting re-usability.
-- [tests] - contains all the tests.
+- [tests](/tests/) - contains all the tests.
 
 ## How to Run:
 -  Download this project on your local machine
 > git clone https://github.com/akshat55narang/playwright-conduit.git
-
-- From the playwright-conduit directory
+- cd to `playwright-conduit` folder
+- Run `npm install` to install all dependencies
+- Run `npx playwright install` - to install all the browsers.
 - Run tests
   - `npm run test`
 - View reports
