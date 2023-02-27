@@ -4,8 +4,8 @@
   "description": "Test automation example for demo real world app using playwright",
   "main": "index.js",
   "scripts": {
-    "ut": "playwright test",
-    "reports": "playwright show-report"
+    "test": "playwright test",
+    "show-reports": "playwright show-report"
   },
   "repository": {
     "type": "git",
