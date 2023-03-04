@@ -4,7 +4,7 @@
   "description": "Test automation example for demo real world app using playwright",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test article.spec.ts --debug",
     "show-reports": "playwright show-report",
     "lint": "eslint . --ext .ts --fix "
   },
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/akshat55narang/playwright-conduit#readme",
   "devDependencies": {
-    "@playwright/test": "^1.30.0",
+    "@playwright/test": "^1.30.2",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
     "eslint": "^8.35.0",
