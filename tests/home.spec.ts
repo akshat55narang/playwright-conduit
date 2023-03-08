@@ -1,11 +1,10 @@
 import { test } from '../fixtures/pageFixtures';
 import routes from '../constants/routes';
 import headerLocators from '../locators/headerLocators';
-import { SignInPage } from '../pages/SignInPage';
-import { SignUpPage } from '../pages/SignUpPage';
-import signInPageLocators from '../locators/signInPageLocators';
-import signUpPageLocators from '../locators/signUpPageLocators';
+import storageStatePaths from '../constants/storageStatePaths';
 
+
+test.use({ storageState: storageStatePaths.emptyStorageState});
 
 test('Home page should be default active tab', async ({ homePage }) => {
     await homePage.verifyIfNavigationItemIsActive(headerLocators.unAuthorizedUserHomeLink);
@@ -20,13 +19,14 @@ test('Home button should redirect to Home page', async ({ homePage }) => {
     await homePage.openNavigationItem(headerLocators.unAuthorizedUserHomeLink);
 });
 
-test('Sign in button should redirect to login page', async ({ homePage }) => {
+test('Sign in button should redirect to login page', async ({ homePage, signInPage }) => {
     await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignInLink);
+    await signInPage.shouldBeOnSignInPage();
 });
 
-test('Sign up button should redirect to register page', async ({ homePage }) => {
+test('Sign up button should redirect to register page', async ({ homePage, signUpPage }) => {
     await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignUpLink);
-    await homePage.shouldBeVisible(signUpPageLocators.emailInput);
+    await signUpPage.shouldBeOnSignUpPage();
 });
 
 for (const route in routes) {
