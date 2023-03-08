@@ -7,7 +7,6 @@ import { HomePage } from '../pages/HomePage';
 import { LoggedInUserPage } from '../pages/LoggedInUserPage';
 import { SignInPage } from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
-import { UserApi } from '../rest/UserApi';
 
 type Fixtures = {
     homePage: HomePage,
@@ -17,25 +16,16 @@ type Fixtures = {
     articleEditorPage: ArticleEditorPage
 }
 
-const EMPTY_STORAGE_STATE_PATH = 'playwright/.auth/empty_state.json';
-
 export const test = base.extend<Fixtures>({
-    homePage: async ({ browser }, use) => {
-        const context = await browser.newContext({storageState: EMPTY_STORAGE_STATE_PATH});
-        const homePage = new HomePage(await context.newPage());
+    homePage: async ({ page }, use) => {
+        const homePage = new HomePage(page);
         await homePage.open();
         await use(homePage);
-        await context.close();
     },
-    signInPage: async ({ browser }, use) => {
-        const context = await browser.newContext({ storageState: EMPTY_STORAGE_STATE_PATH});
-        const userApi = new UserApi();
-        const signInPage = new SignInPage(await context.newPage());
-        
-        await userApi.createUserIfNotExisting();
+    signInPage: async ({ page }, use) => {
+        const signInPage = new SignInPage(page);
         await signInPage.open();
         await use(signInPage);
-        await context.close();
     },
     signUpPage: async ({ page }, use) => {
         const signUpPage = new SignUpPage(page);
