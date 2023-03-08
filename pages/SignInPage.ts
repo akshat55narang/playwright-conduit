@@ -4,7 +4,7 @@ import { Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import signInPageLocators from '../locators/signInPageLocators';
 import routes from "../constants/routes";
-import userOverviewPageLocators from "../locators/userOverviewPageLocators";
+import userOverviewPageLocators from "../locators/loggedInUserPageLocators";
 
 export class SignInPage extends BasePage {
     readonly page: Page;

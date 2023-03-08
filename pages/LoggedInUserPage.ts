@@ -1,9 +1,10 @@
 //@ts-check
 
 import { Page } from "@playwright/test";
+import loggedInUserPageLocators from "../locators/loggedInUserPageLocators";
 import { BasePage } from "./BasePage";
 
-export class UserOverviewPage extends BasePage {
+export class LoggedInUserPage extends BasePage {
     readonly page: Page;
 
     constructor(page: Page) {
@@ -12,6 +13,7 @@ export class UserOverviewPage extends BasePage {
     }
 
     async open() {
-        this.goto();
+        await this.goto();
+        await this.shouldBeVisible(loggedInUserPageLocators.yourFeedLink);
     }
 }
