@@ -3,7 +3,7 @@ import { API_BASE_URL } from "../constants/RestContants";
 import { LoginApi } from "./LoginApi";
 
 export class BaseApi {
-    protected readonly loginApi: LoginApi = new LoginApi();
+    private readonly loginApi: LoginApi = new LoginApi();
 
     async baseRequest(): Promise<APIRequestContext> {
         const accessToken = await this.loginApi.generateAccessToken();
