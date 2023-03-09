@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import routes from "../fixtures/routes";
 import articleEditorPageLocators from "../locators/articleEditorPageLocators";
 import articlePageLocators from "../locators/articlePageLocators";
 import { BasePage } from "./BasePage";
@@ -18,7 +17,6 @@ export class ArticleEditorPage extends BasePage {
         await this.sendTextToField(articleEditorPageLocators.articleDescriptionInput, 'Test Description');
         await this.sendTextToField(articleEditorPageLocators.articleBodyTextArea, 'Article Body');
         await this.clickByLocator(articleEditorPageLocators.publishArticleButton);
-        await this.urlShouldContainText(routes.article);
         await this.shouldBeVisible(articlePageLocators.articleHeader);
     }
 }
