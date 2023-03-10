@@ -11,8 +11,12 @@ export class BasePage {
         await this.page.goto(url);
     }
 
+    async reload() {
+        await this.page.reload();
+    }
+
     async urlShouldContainText(text: string) {
-        await expect(this.page).toHaveURL(text);
+        await expect(this.page.url()).toContain(text);
     }
 
     async shouldHaveTitle(title: string) {

@@ -1,6 +1,9 @@
 import { test } from '../fixtures/pageFixtures';
+import { UserApi } from '../rest/UserApi';
 
 test('should be able to login via valid user', async ({ signInPage }) => {
+    const userApi = new UserApi();
+    await userApi.createUserIfNotExisting();
     await signInPage.loginWithValidUser();
 });
 
