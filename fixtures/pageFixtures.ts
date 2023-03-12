@@ -1,8 +1,8 @@
 //@ts-check
 
 import { test as base } from '@playwright/test';
-import loggedInUserPageLocators from '../locators/loggedInUserPageLocators';
 import { ArticleEditorPage } from '../pages/ArticleEditorPAge';
+import { ArticlePage } from '../pages/ArticlePage';
 import { HomePage } from '../pages/HomePage';
 import { LoggedInUserPage } from '../pages/LoggedInUserPage';
 import { SignInPage } from '../pages/SignInPage';
@@ -13,7 +13,8 @@ type Fixtures = {
     signInPage: SignInPage,
     signUpPage: SignUpPage,
     loggedInUserPage: LoggedInUserPage,
-    articleEditorPage: ArticleEditorPage
+    articleEditorPage: ArticleEditorPage,
+    articlePage: ArticlePage
 }
 
 export const test = base.extend<Fixtures>({
@@ -37,10 +38,13 @@ export const test = base.extend<Fixtures>({
         await loggedInUserPage.open();
         await use(loggedInUserPage);
     },
-    articleEditorPage: async({ loggedInUserPage, page }, use) => {
-        await loggedInUserPage.clickByLocator(loggedInUserPageLocators.newArticleLink);
+    articleEditorPage: async({ page }, use) => {
         const articleEditorPage = new ArticleEditorPage(page);
         await use(articleEditorPage);
+    },
+    articlePage: async({ page }, use) => {
+        const articlePage = new ArticlePage(page);
+        await use(articlePage);
     }
 });
 export { expect } from '@playwright/test';

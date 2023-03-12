@@ -12,11 +12,12 @@ export class ArticleEditorPage extends BasePage {
     }
     
 
-    async createArticle() {
-        await this.sendTextToField(articleEditorPageLocators.articleTitleInput, 'Creating new article');
-        await this.sendTextToField(articleEditorPageLocators.articleDescriptionInput, 'Test Description');
-        await this.sendTextToField(articleEditorPageLocators.articleBodyTextArea, 'Article Body');
+    async enterArticleDetailsAndPublish(title, description = 'Test Description', body = 'Article Body') {
+        await this.sendTextToField(articleEditorPageLocators.articleTitleInput, title);
+        await this.sendTextToField(articleEditorPageLocators.articleDescriptionInput, description);
+        await this.sendTextToField(articleEditorPageLocators.articleBodyTextArea, body);
         await this.clickByLocator(articleEditorPageLocators.publishArticleButton);
         await this.shouldBeVisible(articlePageLocators.articleHeader);
     }
+
 }

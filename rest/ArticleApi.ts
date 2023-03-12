@@ -22,26 +22,50 @@ export class ArticleApi extends BaseApi {
 
     async getAllArticles() {
         const response = await (await (this.baseRequest())).get(ARTICLES_API);
-        await expect(response.status()).toBe(StatusCodes.OK);     
+        await expect(response.status()).toBe(StatusCodes.OK);
 
         return (await response.json()).articles;
     }
 
     async getArticleByTitle(title: string) {
         const articles = await this.getAllArticles();
-
-        return articles.filter(article => article.title === title);
+        return articles.find(article => article.title === title);
     }
 
     async deleteArticleByTitle(title: string) {
-        const articles = await this.getArticleByTitle(title);
+        const article = await this.getArticleByTitle(title);
+        const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
         
-        for (const article of articles) {
-            const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
-            await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
+        await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
+        console.log(`Deleted ${article} with ${title}!!`);
+
+    }
+
+    async createArticleIfNotExisting(title, description = "Default description", body = "Default body", tags = []) {
+        const article = await this.getArticleByTitle(title);
+
+        if(!article) {
+            const createdArticle = await this.createArticle(title, description, body, tags);
+            return createdArticle.slug;
         }
-        console.log(`Deleted ${articles.length} with ${title}!!`);
-        
+        console.log(`Article ${title} not created as it already exists!!`)
+        return article.slug;
+    }
+
+    async createArticle(title, description, body , tags) {
+        const response = await (await this.baseRequest()).post(ARTICLES_API, {
+            data: {
+                "article": {
+                    "title": title,
+                    "description": description,
+                    "body": body,
+                    "tagList": tags
+                }
+            }
+        });
+        await expect(response.status()).toBe(StatusCodes.OK);
+        console.log(`Create article with title = ${title}!`)
+        return (await response.json()).article;
     }
 
     async deleteArticleByAuthor(authorName: string) {
