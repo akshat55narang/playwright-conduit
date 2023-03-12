@@ -2,7 +2,6 @@ import { expect, request } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
 import { API_BASE_URL, LOGIN_API } from "../constants/RestContants";
 
-const authFile = 'playwright/.auth/user.json';
 export class LoginApi {
 
     async generateAccessToken(
@@ -25,7 +24,6 @@ export class LoginApi {
           });
           const responseBody = await response.json();
           await expect(response.status()).toEqual(StatusCodes.OK);
-          await apiRequestContext.storageState({ path: authFile}); 
           return responseBody.user.token;
       }
 }
