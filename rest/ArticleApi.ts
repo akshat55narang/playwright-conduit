@@ -34,6 +34,10 @@ export class ArticleApi extends BaseApi {
 
     async deleteArticleByTitle(title: string) {
         const article = await this.getArticleByTitle(title);
+        if (!article) {
+            console.log(`Article with title ${title} already deleted!!`)
+            return;
+        }
         const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
         
         await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);

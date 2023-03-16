@@ -15,6 +15,10 @@ export class LoggedInUserPage extends BasePage {
 
     async open() {
         await this.goto();
+        await this.shouldBeOnLoggedInUserHomePage();
+    }
+
+    async shouldBeOnLoggedInUserHomePage() {
         await this.shouldBeVisible(loggedInUserPageLocators.yourFeedLink);
     }
 
