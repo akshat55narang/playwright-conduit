@@ -2,6 +2,7 @@ import { expect, Page } from "@playwright/test";
 import routes from "../fixtures/routes";
 import articleEditorPageLocators from "../locators/articleEditorPageLocators";
 import articlePageLocators from "../locators/articlePageLocators";
+import loggedInUserPageLocators from "../locators/loggedInUserPageLocators";
 import { BasePage } from "./BasePage";
 
 export class ArticlePage extends BasePage {
@@ -26,7 +27,12 @@ export class ArticlePage extends BasePage {
         await this.shouldBeVisible(articleEditorPageLocators.articleTitleInput);
     }
 
-    async articleShouldHaveTitlAndBody(expectedTitle: string, expectedBody) {
+    async deleteArticleUsingBannerDeleteButton() {
+        await this.clickByLocator(articlePageLocators.bannerDeleteArticleButton);
+        await this.shouldBeVisible(loggedInUserPageLocators.yourFeedLink);
+    }
+
+    async articleShouldHaveTitleAndBody(expectedTitle: string, expectedBody) {
         await this.shouldContainText(articlePageLocators.articleHeader, expectedTitle);
         await this.shouldContainText(articlePageLocators.articleBodyParagraph, expectedBody);
     }
