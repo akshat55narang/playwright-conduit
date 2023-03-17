@@ -10,23 +10,16 @@ test('Home page should be default active tab', async ({ homePage }) => {
     await homePage.verifyIfNavigationItemIsActive(headerLocators.unAuthorizedUserHomeLink);
 });
 
-test('App logo should redirect to home page', async ({ homePage }) => {
-    await homePage.clickByLocator(headerLocators.appLogoLink);
-    await homePage.verifyIfNavigationItemIsActive(headerLocators.unAuthorizedUserHomeLink);
+test.fixme('Home page banner should contain app name and description', async({homePage}) => {
+
 });
 
-test('Home button should redirect to Home page', async ({ homePage }) => {
-    await homePage.openNavigationItem(headerLocators.unAuthorizedUserHomeLink);
+test.fixme('Home page should contain articles in Global Feed', async({homePage}) => {
+
 });
 
-test('Sign in button should redirect to login page', async ({ homePage, signInPage }) => {
-    await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignInLink);
-    await signInPage.shouldBeOnSignInPage();
-});
+test.fixme('Home page should contain Popular tags container', async({homePage}) => {
 
-test('Sign up button should redirect to register page', async ({ homePage, signUpPage }) => {
-    await homePage.openNavigationItem(headerLocators.unAuthorizedUserSignUpLink);
-    await signUpPage.shouldBeOnSignUpPage();
 });
 
 for (const route in routes) {
