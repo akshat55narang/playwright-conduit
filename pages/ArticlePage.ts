@@ -22,7 +22,12 @@ export class ArticlePage extends BasePage {
         await this.urlShouldContainText(articleSlug);
     }
 
-    async clickBannerEditArticleButton() {
+    async editArticleUsingBannerButton() {
+        await this.clickByLocator(articlePageLocators.bannerEditArticleLink);
+        await this.shouldBeVisible(articleEditorPageLocators.articleTitleInput);
+    }
+
+    async editArticleUsingMainViewButton() {
         await this.clickByLocator(articlePageLocators.bannerEditArticleLink);
         await this.shouldBeVisible(articleEditorPageLocators.articleTitleInput);
     }
@@ -32,8 +37,19 @@ export class ArticlePage extends BasePage {
         await this.shouldBeVisible(loggedInUserPageLocators.yourFeedLink);
     }
 
+    async deleteArticleUsingMainViewDeleteButton() {
+        await this.clickByLocator(articlePageLocators.bannerDeleteArticleButton);
+        await this.shouldBeVisible(loggedInUserPageLocators.yourFeedLink);
+    }
+
     async articleShouldHaveTitleAndBody(expectedTitle: string, expectedBody) {
         await this.shouldContainText(articlePageLocators.articleHeader, expectedTitle);
         await this.shouldContainText(articlePageLocators.articleBodyParagraph, expectedBody);
+    }
+
+    async addComment(comment: string) {
+        await this.sendTextToField(articlePageLocators.commentTextArea, comment);
+        await this.clickByLocator(articlePageLocators.postCommentButton);
+        await this.shouldBeVisible(`${articlePageLocators.commentParagraph}[text()="${comment}"]`);
     }
 }
