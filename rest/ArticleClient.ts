@@ -1,23 +1,12 @@
 import { expect } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
 import { ARTICLES_API } from "../constants/RestContants";
-import { BaseApi } from "./BaseApi";
+import { BaseClient } from "./BaseClient";
 
-export class ArticleApi extends BaseApi {
+export class ArticleClient extends BaseClient {
 
     constructor() {
         super();
-    }
-
-    async getArticlesByAuthor(authorName: string) {
-        const response = await (await (this.baseRequest())).get(ARTICLES_API, {
-            params: {
-                author: authorName
-            }
-        });
-        await expect(response.status()).toBe(StatusCodes.OK);
-        const json = await response.json();
-        return json.articles;
     }
 
     async getAllArticles() {
@@ -32,6 +21,23 @@ export class ArticleApi extends BaseApi {
         return articles.find(article => article.title === title);
     }
 
+    async getArticlesByAuthor(authorName: string) {
+        const response = await (await (this.baseRequest())).get(ARTICLES_API, {
+            params: {
+                author: authorName
+            }
+        });
+        await expect(response.status()).toBe(StatusCodes.OK);
+        const json = await response.json();
+        return json.articles;
+    }
+
+    async deleteArticlesByTitle(titles: Array<string>) {
+        for(const title of titles) {
+            await this.deleteArticleByTitle(title);
+        }
+    }
+
     async deleteArticleByTitle(title: string) {
         const article = await this.getArticleByTitle(title);
         if (!article) {
@@ -41,7 +47,20 @@ export class ArticleApi extends BaseApi {
         const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
         
         await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
-        console.log(`Deleted ${article} with ${title}!!`);
+        console.log(`Deleted ${article.slug} with ${title}!!`);
+    }
+
+    async deleteArticleByAuthor(authorName: string) {
+        const articles = await this.getArticlesByAuthor(authorName);
+        if(articles.length === 0) {
+            console.log(`No articles from author ${authorName} exist!!`);
+            return;
+        }
+
+        for (const article of articles) {
+            const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
+            await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
+        }
 
     }
 
@@ -70,15 +89,5 @@ export class ArticleApi extends BaseApi {
         await expect(response.status()).toBe(StatusCodes.OK);
         console.log(`Create article with title = ${title}!`)
         return (await response.json()).article;
-    }
-
-    async deleteArticleByAuthor(authorName: string) {
-        const articles = await this.getArticlesByAuthor(authorName);
-
-        for (const article of articles) {
-            const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
-            await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
-        }
-
     }
 }
