@@ -2,7 +2,7 @@ import { expect, request } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
 import { API_BASE_URL, LOGIN_API } from "../constants/RestContants";
 
-export class LoginApi {
+export class LoginClient {
 
     async generateAccessToken(
         email = "DX1193111111@testacc.com",

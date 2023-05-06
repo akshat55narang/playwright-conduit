@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
 import { PROFILES_API, USERS_API, USER_API } from "../constants/RestContants";
-import { BaseApi } from "./BaseApi";
+import { BaseClient } from "./BaseClient";
 
-export class UserApi extends BaseApi {
+export class UserClient extends BaseClient {
     
     constructor() {
         super();

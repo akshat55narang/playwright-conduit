@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
 import { ARTICLES_API } from "../constants/RestContants";
-import { BaseApi } from "./BaseApi";
+import { BaseClient } from "./BaseClient";
 
-export class ArticleApi extends BaseApi {
+export class ArticleClient extends BaseClient {
 
     constructor() {
         super();
