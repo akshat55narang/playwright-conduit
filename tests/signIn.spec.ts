@@ -1,12 +1,11 @@
 import storageStatePaths from '../constants/storageStatePaths';
 import { test } from '../fixtures/pageFixtures';
-import { UserApi } from '../rest/UserApi';
-
+import { UserClient } from '../rest/UserClient';
 test.use({ storageState: storageStatePaths.emptyStorageState});
 
 test('should be able to login via valid user', async ({ signInPage }) => {
-    const userApi = new UserApi();
-    await userApi.createUserIfNotExisting();
+    const userClient = new UserClient();
+    await userClient.createUserIfNotExisting();
     await signInPage.loginWithValidUser();
 });
 
