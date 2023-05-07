@@ -23,7 +23,6 @@ export class ArticleEditorPage extends BasePage {
 
     }
 
-
     async enterArticleDetailsAndPublish(title, description = 'Test Description', body = 'Article Body') {
         await this.articleTitleInput.fill(title);
         await this.articleDescriptionInput.fill(description);

@@ -1,6 +1,6 @@
-export const API_BASE_URL = "https://api.realworld.io";
-export const USERS_API = '/api/users';
-export const USER_API = '/api/user';
-export const LOGIN_API = `${USERS_API}/login`;
-export const PROFILES_API = '/api/profiles';
-export const ARTICLES_API = '/api/articles';
+export const API_BASE_URI = "https://api.realworld.io";
+export const USERS_RESOURCE = '/api/users';
+export const USER_RESOURCE = '/api/user';
+export const LOGIN_RESOURCE = `${USERS_RESOURCE}/login`;
+export const PROFILES_RESOURCE = '/api/profiles';
+export const ARTICLES_RESOURCE = '/api/articles';

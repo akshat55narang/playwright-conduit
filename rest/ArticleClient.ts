@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { StatusCodes } from "http-status-codes";
-import { ARTICLES_API } from "../constants/RestContants";
+import { ARTICLES_RESOURCE } from "../constants/RestContants";
 import { BaseClient } from "./BaseClient";
 
 export class ArticleClient extends BaseClient {
@@ -10,7 +10,7 @@ export class ArticleClient extends BaseClient {
     }
 
     async getAllArticles() {
-        const response = await (await (this.baseRequest())).get(ARTICLES_API);
+        const response = await (await (this.baseRequest())).get(ARTICLES_RESOURCE);
         await expect(response.status()).toBe(StatusCodes.OK);
 
         return (await response.json()).articles;
@@ -22,7 +22,7 @@ export class ArticleClient extends BaseClient {
     }
 
     async getArticlesByAuthor(authorName: string) {
-        const response = await (await (this.baseRequest())).get(ARTICLES_API, {
+        const response = await (await (this.baseRequest())).get(ARTICLES_RESOURCE, {
             params: {
                 author: authorName
             }
@@ -44,8 +44,8 @@ export class ArticleClient extends BaseClient {
             console.log(`Article with title ${title} already deleted!!`)
             return;
         }
-        const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
-        
+        const response = await (await this.baseRequest()).delete(`${ARTICLES_RESOURCE}/${article.slug}`);
+
         await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
         console.log(`Deleted ${article.slug} with ${title}!!`);
     }
@@ -58,7 +58,7 @@ export class ArticleClient extends BaseClient {
         }
 
         for (const article of articles) {
-            const response = await (await this.baseRequest()).delete(`${ARTICLES_API}/${article.slug}`);
+            const response = await (await this.baseRequest()).delete(`${ARTICLES_RESOURCE}/${article.slug}`);
             await expect(response.status()).toEqual(StatusCodes.NO_CONTENT);
         }
 
@@ -76,7 +76,7 @@ export class ArticleClient extends BaseClient {
     }
 
     async createArticle(title, description, body , tags) {
-        const response = await (await this.baseRequest()).post(ARTICLES_API, {
+        const response = await (await this.baseRequest()).post(ARTICLES_RESOURCE, {
             data: {
                 "article": {
                     "title": title,
