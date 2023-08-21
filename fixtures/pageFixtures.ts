@@ -1,7 +1,7 @@
 //@ts-check
 
 import { test as base } from '@playwright/test';
-import { ArticleEditorPage } from '../pages/ArticleEditorPAge';
+import { EditArticlePage } from '../pages/EditArticlePage';
 import { ArticlePage } from '../pages/ArticlePage';
 import { HomePage } from '../pages/HomePage';
 import { LoggedInUserPage } from '../pages/LoggedInUserPage';
@@ -13,7 +13,7 @@ type Fixtures = {
     signInPage: SignInPage,
     signUpPage: SignUpPage,
     loggedInUserPage: LoggedInUserPage,
-    articleEditorPage: ArticleEditorPage,
+    editArticlePage: EditArticlePage,
     articlePage: ArticlePage
 }
 
@@ -38,8 +38,8 @@ export const test = base.extend<Fixtures>({
         await loggedInUserPage.open();
         await use(loggedInUserPage);
     },
-    articleEditorPage: async({ page }, use) => {
-        const articleEditorPage = new ArticleEditorPage(page);
+    editArticlePage: async({ page }, use) => {
+        const articleEditorPage = new EditArticlePage(page);
         await use(articleEditorPage);
     },
     articlePage: async({ page }, use) => {

@@ -7,7 +7,6 @@ export class BaseClient {
 
     async baseRequest(): Promise<APIRequestContext> {
         const accessToken = await this.loginApi.generateAccessToken();
-
         return await request.newContext({
           baseURL: API_BASE_URI,
           ignoreHTTPSErrors: true,

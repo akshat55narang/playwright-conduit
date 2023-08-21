@@ -2,7 +2,7 @@ import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { HeaderSection } from "./sections/HeaderSection";
 
-export class ArticleEditorPage extends BasePage {
+export class EditArticlePage extends BasePage {
     readonly page: Page;
     readonly headerSection: HeaderSection;
 

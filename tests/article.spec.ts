@@ -3,7 +3,7 @@ import { ArticleClient } from '../rest/ArticleClient';
 
 const articleClient = new ArticleClient();
 
-test('should be able to create article', async ({ articleEditorPage, loggedInUserPage }) => {
+test('should be able to create article', async ({ editArticlePage: articleEditorPage, loggedInUserPage }) => {
     const title = 'Create_Article_using_UI';
     await articleClient.deleteArticleByTitle(title);
 
@@ -12,7 +12,7 @@ test('should be able to create article', async ({ articleEditorPage, loggedInUse
     await expect(articleEditorPage.headerSection.articleHeader).toBeVisible();
 });
 
-test('should be able to edit an article usin Edit button in banner', async ({ articlePage, articleEditorPage }) => {
+test('should be able to edit an article usin Edit button in banner', async ({ articlePage, editArticlePage: articleEditorPage }) => {
     const title = 'Edit_Article_UI_Banner';
     const updatedTitle = `${title}_updated`;
     await articleClient.deleteArticleByTitle(updatedTitle);
@@ -26,7 +26,7 @@ test('should be able to edit an article usin Edit button in banner', async ({ ar
     await articlePage.articleShouldHaveTitleAndBody(updatedTitle, updatedBody);
 });
 
-test('should be able to edit an article usin Edit button in main view', async ({ articlePage, articleEditorPage }) => {
+test('should be able to edit an article usin Edit button in main view', async ({ articlePage, editArticlePage: articleEditorPage }) => {
     const title = 'Edit_Article_UI_Main_View';
     const updatedTitle = `${title}_updated`;
     await articleClient.deleteArticleByTitle(updatedTitle);
